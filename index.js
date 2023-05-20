@@ -29,7 +29,7 @@ async function run() {
     const toysCollection = client.db('disneyToys').collection('toys');
 
     app.get('/toys', async(req, res)=>{
-        const cursor = toysCollection.find();
+        const cursor = toysCollection.find().limit(20);
         const result = await cursor.toArray();
         res.send(result);
     })
@@ -39,6 +39,16 @@ async function run() {
         const id = req.params.id;
         const query = { _id: new ObjectId(id) }
         const result = await toysCollection.findOne(query);
+        res.send(result);
+    })
+
+    app.get('/toy', async (req, res) => {
+        console.log(req.query.email);
+        let query = {};
+        if (req.query?.email) {
+            query = { email: req.query.email }
+        }
+        const result = await toysCollection.find(query).toArray();
         res.send(result);
     })
 
