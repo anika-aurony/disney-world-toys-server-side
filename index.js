@@ -9,8 +9,8 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 app.use(cors());
 app.use(express.json());
 
-
-const uri = "mongodb+srv://aurony111:AMWMZXmSDMfQK5Zc@cluster0.mu4fgop.mongodb.net/?retryWrites=true&w=majority";
+console.log(`${process.env.DISNEY_USER}`)
+const uri = `mongodb+srv://${process.env.DISNEY_USER}:${process.env.DISNEY_PASS}@cluster0.mu4fgop.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
